@@ -23,6 +23,15 @@ def solution2(phone_book):
                  return False
     return answer
 
+def solution3(phoneBook):
+    #x의 길이로 sort하게 된다면 시간복잡도가 O(n^2)까지는 안 감
+    phoneBook.sort(key=lambda x: len(x))
+    for a in range(len(phoneBook)):
+        for b in range(a+1, len(phoneBook)):
+            if phoneBook[b][:len(phoneBook[a])] == phoneBook[a]:
+                return False
+    return True
+
 
 print(solution(['119', '97674223', '1195524421']))
 print(solution(['123','456','789']))
