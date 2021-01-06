@@ -1,3 +1,4 @@
+
 import numpy as np
 def solution(strings, n):
     arr = np.argsort(list(s[n] for s in strings))
