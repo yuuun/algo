@@ -1,0 +1,5 @@
+n_input = int(input())
+median = (int)((n_input - 1) / 2)
+fig_list = list(map(int, input().split()))
+fig_list.sort()
+print(fig_list[median])
