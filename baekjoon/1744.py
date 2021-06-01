@@ -1,3 +1,4 @@
+#greedy algorithm
 num = int(input())
 
 pos_list = []
