@@ -28,9 +28,6 @@ else:
     
     ans += ('DLDR') * ((r - r_min - 1) // 2)
     
-    if c_min < c - 2:
-        ans += 'R'
-
-    ans += ('U' * (r - 1) + 'R' + 'D' * (r-1)) * ((c - c_min - 1) // 2)
+    ans += ('R' + 'U' * (r - 1) + 'R' + 'D' * (r-1)) * ((c - c_min - 1) // 2)
     
     print(ans)
