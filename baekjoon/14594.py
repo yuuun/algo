@@ -10,4 +10,4 @@ else:
         x, y = map(int, input().split())
         for i in range(x, y):
             rooms[i] = 0
-    print(rooms[1:].count(1) + 1)
+    print(rooms.count(1))
