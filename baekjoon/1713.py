@@ -10,7 +10,7 @@ for t, k in enumerate(p_list):
     #이미 값이 있을 경우에는 update
     if k in li:
         ind = li.index(k)
-        cnt_list[ind] = [cnt_list[ind][0] + 1, t]
+        cnt_list[ind] = [cnt_list[ind][0] + 1, cnt_list[ind][1]]
 
     #액자에 아무도 안 들어갔을 경우
     elif len(li) < n:
