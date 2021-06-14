@@ -1,3 +1,4 @@
+#fail
 n, t, p = map(int, input().split())
 
 total_time = set([])
