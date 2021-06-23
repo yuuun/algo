@@ -1,4 +1,3 @@
-#TBD
 R, C = map(int, input().split())
 K = int(input())
 visited = [[False for _ in range(C)] for _ in range(R)]
@@ -22,6 +21,7 @@ cur = 0
 tmp = 1
     
 while True:
+    print(visited)
     visited[sr][sc] = True
     if tmp == 4:
         break
@@ -32,6 +32,6 @@ while True:
         tmp = 0
     else:
         tmp += 1
-    cur = (cur + 1) % 4
+        cur = (cur + 1) % 4
 
 print(sr, sc)
