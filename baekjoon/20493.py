@@ -1,5 +1,4 @@
 #TBD
-
 n, max_val = map(int, input().split())
 
 if n == 0:
@@ -35,7 +34,7 @@ else:
     for idx in range(0, n):
         time_list.append(dir_info[idx + 1][0] - dir_info[idx][0])
     
-    cur = move(cur, cur_dir, 30)
+    cur = move(cur, cur_dir, cur_dir[0])
     for idx, val in enumerate(time_list):
         cur_dir = get_direc(cur_dir, dir_info[idx][1])
         
