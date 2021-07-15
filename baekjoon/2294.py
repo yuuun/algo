@@ -1,14 +1,14 @@
 n, k = map(int, input().split())
 c = [int(input()) for _ in range(n)]
-cnt = 0
 
-for i in c[::-1]:
-    while True:
-        tmp = k // i
-        print(k, i, tmp)
-        if tmp > 0:
-            k -= i
-            cnt += 1
-        else:
-            break
-print(cnt)
+dp = [0 for i in range(k + 1)]
+for i in range(1, k + 1):
+    tmp = []
+    for j in c:
+        if j <= i and dp[i - j] != -1:
+            tmp.append(dp[i - j])
+    if not tmp:
+        dp[i] = -1
+    else:
+        dp[i] = min(tmp) + 1
+print(dp[k])
