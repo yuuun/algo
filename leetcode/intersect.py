@@ -1,5 +1,7 @@
 # https://leetcode.com/explore/challenge/card/september-leetcoding-challenge-2021/638/week-3-september-15th-september-21st/3978/
 from collections import Counter
+
+##효율성 최악이네
 class Solution:
     def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
         ans = []
