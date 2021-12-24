@@ -8,9 +8,10 @@ for i in range(n - 1):
 input()
 paths = sorted(paths, key=lambda x:x[2])
 parent = [i for i in range(n + 1)]
+
 def find_parent(x):
     if parent[x] != x:
-        return find_parent(parent[x])
+        parent[x] = find_parent(parent[x])
     return parent[x]
 
 def find_union(x, y):
