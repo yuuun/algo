@@ -1,4 +1,4 @@
-#TBD
+
 import heapq
 import sys
 from collections import defaultdict
