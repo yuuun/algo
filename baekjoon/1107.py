@@ -1,7 +1,10 @@
 n = int(input())
 m = int(input())
 
-but = list(map(str, input().split()))
+if m == 0:
+    but = []
+else:
+    but = list(map(str, input().split()))
 
 min_cnt = abs(n - 100)
 
