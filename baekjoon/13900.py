@@ -1,3 +1,4 @@
+#시간 초과
 n = int(input())
 num = list(map(int, input().split()))
 
