@@ -6,8 +6,8 @@ n, m, fuel = map(int, input().split())
 maps = [[0] * (n + 1)]
 for _ in range(n):
     maps.append([0] + list(map(int, input().split())))
-sx, sy = map(int, input().split())
-origin, dest = [], []
+taxi_pos = list(map(int, input().split()))
+origin, dest = [[]], [[]]
 
 for _ in range(m):
     x1, y1, x2, y2 = map(int, input().split())
@@ -18,7 +18,8 @@ customers = [False for _ in range(m + 1)]
 dxy =  [[0, 1], [0, -1], [1, 0], [-1, 0]]
 
 def bfs():
-    global sx, sy, cust
+    global taxi_pos, cust
+    sy, sx = taxi_pos[0], taxi_pos[1]
     chk = [[False for _ in range(n + 1)] for _ in range(n + 1)]
     dist = [[sys.maxsize for _ in range(n + 1)] for _ in range(n + 1)]
     q = deque([])
@@ -29,7 +30,7 @@ def bfs():
         y, x = q.popleft()
         for dx, dy in dxy:
             ny, nx = y + dy, x + dx
-            if 0 < ny <= n and 0 < nx < n:
+            if 0 < ny <= n and 0 < nx <= n:
                 if not chk[ny][nx]:
                     chk[ny][nx] = True
                     if maps[ny][nx] == 0:
@@ -41,7 +42,7 @@ def find_cust():
     global maps, customers, fuel
     cust_dis = bfs()
     pq = []
-    for i in range(1, m):
+    for i in range(1, m + 1):
         if not customers[i]:
             y, x = origin[i][0], origin[i][1]
             dist = cust_dis[y][x]
@@ -51,7 +52,7 @@ def find_cust():
         return -1
     dist, _, _, cust_idx = heappop(pq)
     fuel -= dist
-    cust_dis[cust_idx] = True
+    customers[cust_idx] = True
     return cust_idx
 
 def go_dst(cust_idx):
@@ -59,25 +60,26 @@ def go_dst(cust_idx):
     dis = bfs()
     y, x = dest[cust_idx][0], dest[cust_idx][1]
     dist = dis[y][x]
-    if fuel - dist < 0:
+    if fuel < dist:
         return -1
     return dist
 
 pos = True
 cnt = m
-while fuel > 0:
+while cnt:
     cust_idx = find_cust()
+    # print(fuel, cust_idx)
     if cust_idx == -1:
         pos = False
         break
     taxi_pos = origin[cust_idx]
     dist = go_dst(cust_idx)
-    
     if dist == -1:
         pos = False
         break
     fuel += dist
-    taxi_pos = dist[cust_idx]
+    
+    taxi_pos = dest[cust_idx]
     cnt -= 1
 
 if pos:
