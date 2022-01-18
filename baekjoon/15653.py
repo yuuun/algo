@@ -25,15 +25,13 @@ def bfs(bx, by, rx, ry, cnt):
     q.append([bx, by, rx, ry, cnt])
     while q:
         bx, by, rx, ry, cnt = q.popleft()
-        if cnt > 10:
-            break
         for dx, dy in dxy:
             nbx, nby, bc = move(bx, by, dx, dy)
             nrx, nry, rc = move(rx, ry, dx, dy)
 
             if board[nbx][nby] != 'O':
                 if board[nrx][nry] == 'O':
-                    print(1)
+                    print(cnt)
                     return
             
                 if nrx == nbx and nry == nby:
@@ -47,6 +45,6 @@ def bfs(bx, by, rx, ry, cnt):
                 if not visited[nrx][nry][nbx][nby]:
                     visited[nrx][nry][nbx][nby] = True
                     q.append([nbx, nby, nrx, nry, cnt + 1])
-    print(0)
+    print(-1)
 bfs(bx, by, rx, ry, 1)
 visited[rx][ry][bx][by] = True
