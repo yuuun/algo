@@ -23,7 +23,7 @@ for _ in range(m):
         union_parent(a, b)
     elif c == 1:
 
-        if find_parent(a)  == find_parent(b):
+        if find_parent(a) == find_parent(b):
             print("YES")
         else:
             print("NO")
