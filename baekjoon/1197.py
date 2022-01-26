@@ -36,7 +36,7 @@ def prim():
     visited = [False] * (V + 1)
     Elist = [[] for _ in range(V + 1)]
     heap = [[0, 1]]
-    for _ in range(E):
+    for _ in range(e):
         s, e, w = map(int, input().split())
         Elist[s].append([w, e])
         Elist[e].append([w, s])
