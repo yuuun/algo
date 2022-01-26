@@ -1,31 +1,21 @@
-# 시간 초과
+from itertools import combinations
 n = int(input())
 scores = [list(map(int, input().split())) for _ in range(n)]
 
-all_sum = 0
-for sc in scores:
-    all_sum += sum(sc)
-min_val = all_sum
+possible = []
+for pos in list(combinations(list(range(n)), n // 2)):
+    possible.append(pos)
 
-visited = [0] * n
-def cand(idx, cnt):
-    global min_val
-    if cnt == n / 2:
-        s, l = 0, 0
-        for i in range(n):
-            for j in range(n):
-                if visited[i] and visited[j]:
-                    s += scores[i][j]
-                elif not visited[i] and not visited[j]:
-                    l += scores[i][j]
-        min_val = min(min_val, abs(s - l))
-        return
-    for i in range(idx, n):
-        if visited[i]:
-            continue
-        visited[i] = 1
-        cand(i + 1, cnt + 1)
-        visited[i] = 0
+min_val = 10000
+def get_score(x):
+    score = 0
+    for j in range(n // 2):
+        m = x[j]
+        for k in x:
+            score += scores[m][k]
+    return score
 
-cand(0, 0)
+for pos in range(len(possible) // 2):
+    min_val = min(min_val, abs(get_score(possible[pos]) - get_score(possible[-pos - 1])))
+
 print(min_val)
