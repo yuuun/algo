@@ -3,6 +3,8 @@ string = input()
 def check(s):
     cnt = 0
     while s[cnt] == 'w':
+        if len(s) - cnt < 4:
+            return False, 0
         cnt += 1
     len_cnt = 4 * cnt
     if s[:len_cnt] == 'w' * cnt + 'o' * cnt + 'l' * cnt + 'f' * cnt:

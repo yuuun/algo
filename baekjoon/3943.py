@@ -1,20 +1,14 @@
 #구현 - 시간 초과 수정해야됨
 n = int(input())
-
-def hail(n):
-    if n % 2 == 0:
-        return int(n / 2)
-    else:
-        return 3 * n + 1
-
 for _ in range(n):
+    tmp = []
     k = int(input())
-    if k in [4, 2, 1]:
-        print(k)
-    else:
-        max_k = k
-        while k not in [4, 2, 1]:
-            k = hail(k)
-            if max_k < k:
-                max_k = k
-        print(max_k)
+    while True:
+        if 1 in tmp:
+            break
+        tmp.append(k)
+        if k % 2 == 0:
+            k //= 2
+        else:
+            k = 3 * k + 1
+    print(max(tmp))
