@@ -1,3 +1,4 @@
+import re
 string = input()
 
 s = string.replace('ZERO', '0')
@@ -24,6 +25,8 @@ def find_sign():
             else:
                 sign_idx.append(i)
                 sign.append(st)
+        elif not ('0' <= st <= '9'):
+            return False, False
     return sign_idx[1:], sign
 
 def change_num(num):
@@ -46,7 +49,6 @@ if sign_idx == []:   # 식에 연산자가 없을 경우 자기 자신 그대로
     print(s)
     print(string[:-1])
 elif sign_idx:
-    import re
     num = [int(i) for i in re.split('\\D', s) if i != '']
     if len(num) != len(sign) + 1:
         print('Madness!')
