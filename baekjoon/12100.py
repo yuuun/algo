@@ -1,4 +1,4 @@
-# 2048  # 실패
+# 2048 
 from copy import deepcopy
 
 n = int(input())
@@ -10,18 +10,16 @@ def turn_left():
         tmp = [num for num in maps[i] if num != 0]
         if tmp != []:
             t = tmp[0]
-            isTrue = False
+            tmps = [t]
             for j in range(1, len(tmp)):
                 if t == tmp[j]:
-                    tmp[j - 1] *= 2
-                    isTrue = True
-                    break
+                    tmps[-1] *= 2
+                    t = 0
                 else:
                     t = tmp[j]
-            if isTrue:
-                tmp = tmp[:j] + tmp[j + 1:]
-            tmp = tmp + [0] * (n - len(tmp))
-            maps[i] = tmp
+                    tmps.append(t)
+            tmps = tmps + [0] * (n - len(tmps))
+            maps[i] = tmps
     return maps
 
 def turn_right():
@@ -30,20 +28,18 @@ def turn_right():
         tmp = [num for num in maps[i] if num != 0]
         if tmp != []:
             t = tmp[-1]
-            isTrue = False
+            tmps = [t]
             for j in range(len(tmp) - 2, -1, -1):
                 if t == tmp[j]:
-                    tmp[j + 1] *= 2
-                    isTrue = True
-                    break
+                    tmps[-1] *= 2
+                    t = 0
                 else:
                     t = tmp[j]
-            if isTrue:
-                tmp = tmp[:j] + tmp[j + 1:]
-            tmp = [0] * (n - len(tmp)) + tmp
-            maps[i] = tmp
+                    tmps.append(t)
+            tmps = [0] * (n - len(tmps)) + tmps[::-1]
+            maps[i] = tmps
     return maps
-
+    
 def sum_map(dir):
     global maps
     if dir == 0:        # 왼쪽으로 이동
@@ -85,8 +81,3 @@ def dfs(cnt):
 
 dfs(0)
 print(max(ans))
-
-# maps = sum_map(maps, 2)
-# maps = sum_map(maps, 1)
-# max_val = get_max(maps)
-# print('end')
