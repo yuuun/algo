@@ -20,16 +20,15 @@ def change_dice(t):
 
 for t in directions:
     dx, dy = dxy[t][0], dxy[t][1]
-    x, y = x + dx, y + dy
-    if x < 0 or x >= n or y < 0 or y >= m:
-        x = x - dx
-        y = y - dy
+    nx, ny = x + dx, y + dy
+    if nx < 0 or nx >= n or ny < 0 or ny >= m:
         continue
 
     change_dice(t)
-    if maps[x][y] == 0:
-        maps[x][y] = dice[6]
+    if maps[nx][ny] == 0:
+        maps[nx][ny] = dice[6]
     else:
-        dice[6] = maps[x][y]
-        maps[x][y] = 0
+        dice[6] = maps[nx][ny]
+        maps[nx][ny] = 0
+    x, y = nx, ny
     print(dice[1])
