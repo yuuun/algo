@@ -2,7 +2,6 @@ from collections import defaultdict
 ans = 0
 
 def solution(info, edges):
-    global visited
     dics = defaultdict(set)
     for a, b in edges:
         dics[a].add(b)
