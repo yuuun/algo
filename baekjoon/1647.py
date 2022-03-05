@@ -7,7 +7,7 @@ paths = sorted(paths, key=lambda x: x[2])
 parents = [i for i in range(n + 1)]
 def find_parent(x):
     if parents[x] != x:
-        return find_parent(parents[x])
+        parents[x] = find_parent(parents[x])
     return parents[x]
 
 def union_parent(x, y):

@@ -1,6 +1,7 @@
 ### 최소 스패닝 트리 - 처음 하는 유형
 #https://hillier.tistory.com/54
-v, e = map(int, input().split())
+import heapq
+V, e = map(int, input().split())
 
 '''
 간선이 적을 경우, Kruskal, 많을 경우 Prim 알고리즘
@@ -10,7 +11,8 @@ Prim: 임의의 정점 선택, 해당 정점에서 갈 수 있는 간선을 minh
 
 #kruskal
 def kruskal():
-    Vroot = [i for i in range(v + 1)]
+    global e
+    Vroot = [i for i in range(V + 1)]
     Elist = []
     for _ in range(e):
         Elist.append(list(map(int, input().split())))
@@ -33,6 +35,7 @@ def kruskal():
     print(answer)
 
 def prim():
+    global e
     visited = [False] * (V + 1)
     Elist = [[] for _ in range(V + 1)]
     heap = [[0, 1]]
@@ -44,7 +47,7 @@ def prim():
     cnt = 0
 
     while heap:
-        if cnt == v:
+        if cnt == V:
             break
         w, s = heapq.heappop(heap)
         if not visited[s]:
