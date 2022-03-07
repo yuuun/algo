@@ -1,4 +1,4 @@
-# 3:38 - 3:58
+# 20분 소요
 '''
 n = int(input())
 a = list(map(int, input().split()))
@@ -35,7 +35,7 @@ print(max(cand))
 print(min(cand))
 '''
 
-# 4:02 - 4:13
+# 11분 소요
 n = int(input())
 a = list(map(int, input().split()))
 operator = list(map(int, input().split()))
