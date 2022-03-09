@@ -1,4 +1,3 @@
-# 25%에서 시간초과
 n, k = map(int, input().split())
 fish = list(map(int, input().split()))
 
@@ -27,10 +26,11 @@ def do_first():
     while True:
         left_fish = rotate_fish(left_fish) + [right_fish[:cnt]]
         right_fish = right_fish[cnt:]
-        if len(right_fish) <= cnt:
-            break
         if i % 2 == 1:
             cnt += 1
+        if len(right_fish) < cnt:
+            break
+        
         i += 1
     r, c = len(left_fish), len(left_fish[0])
     
@@ -118,16 +118,13 @@ def check_final():
         return False
     return True
 
-ans = 0
+ans = 1
 while True: 
+    fill_fish() # 최소값 가지는 어항에 물고기 추가
+    fish = do_first() # 달팽이 모양으로 계속 쌓는 과정
+    fish = do_second() 
+    
     if check_final():
         break
-    fill_fish()
-    # print(fish)
-    fish = do_first()
-    # print(fish)
-    fish = do_second()
-    # print(fish)
-    
     ans += 1
 print(ans)
