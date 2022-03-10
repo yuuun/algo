@@ -1,3 +1,5 @@
+import sys
+input = sys.stdin.readline
 n, k = map(int, input().split())
 fish = list(map(int, input().split()))
 
@@ -54,8 +56,9 @@ def do_first():
             for j in range(c):
                 left_fish[i][j] += left_cnt[i][j]
         return down_fish(left_fish, r, c)
-        
-    right_cnt = [0] * len(right_fish)
+    
+    rr = len(right_fish)
+    right_cnt = [0] * rr
     sub = abs(right_fish[0] - left_fish[-1][-1]) // 5
     if sub > 0:
         if right_fish[0] > left_fish[-1][-1]:
@@ -65,20 +68,20 @@ def do_first():
             left_cnt[-1][-1] -= sub
             right_cnt[0] += sub
 
-    for i in range(len(right_fish) - 1):
-        sub = abs(right_fish[i] - right_fish[i + 1]) // 5
+    for i, j in zip(range(rr), range(1, rr)):
+        sub = abs(right_fish[i] - right_fish[j]) // 5
         if sub > 0:
-            if right_fish[i] > right_fish[i + 1]:
+            if right_fish[i] > right_fish[j]:
                 right_cnt[i] -= sub
-                right_cnt[i + 1] += sub
+                right_cnt[j] += sub
             else:
                 right_cnt[i] += sub
-                right_cnt[i + 1] -= sub
+                right_cnt[j] -= sub
 
     for i in range(r):
         for j in range(c):
             left_fish[i][j] += left_cnt[i][j]
-    for i in range(len(right_fish)):
+    for i in range(rr):
         right_fish[i] += right_cnt[i]
         
     # 어항 내려놓기
