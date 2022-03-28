@@ -21,7 +21,7 @@ def remove_num():
     #같은 원판에 인접한 수 제거
     for j, cir in enumerate(circle):
         for i in range(-1, len(cir) - 1):
-            if cir[i] == cir[i + 1] and cir[i] != 'x':
+            if cir[i] != 'x' and cir[i] == cir[i + 1]:
                 new_circle[j][i] = 'x'
                 new_circle[j][i + 1] = 'x'
                 flag = False
@@ -29,7 +29,7 @@ def remove_num():
     #원판 사이에 인접한 수 제거
     for j in range(m):
         for i in range(n - 1):
-                if circle[i][j] == circle[i + 1][j] and circle[i][j] != 'x':
+                if circle[i][j] != 'x' and circle[i][j] == circle[i + 1][j] :
                     new_circle[i][j] = 'x'
                     new_circle[i + 1][j] = 'x'
                     flag = False
@@ -66,7 +66,7 @@ def cnt_sum():
 for _ in range(t):
     i, d, k = map(int, input().split())
     k = k if d == 0 else -k
-    for t in range(i, n + 1, i):
+    for t in range(i, n + 1, i): # i의 배수에 해당하는 원판 이동
         circle[t - 1].rotate(k)
     circle = remove_num()
     # print(circle)
