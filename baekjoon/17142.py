@@ -37,6 +37,7 @@ def spread_virus(virus_list):
         _visited[v[0]][v[1]] = True
     while q:
         x, y, cnt = q.popleft()
+        # 현 시점까지의 cnt개수 구하기
         if maps[x][y] == 0:
             candidate.add(cnt)
         for dx, dy in dxy:
