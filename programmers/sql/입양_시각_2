@@ -1,0 +1,18 @@
+with recursive time as (
+    select 0 as h
+    union all
+    select h+1 from time where h < 23
+)
+select h, count(datetime) 
+from time
+    left join animal_outs on h = hour(datetime)
+group by h
+order by h;
+
+SELECT B.HOUR, COUNT(A.ANIMAL_ID) COUNT 
+FROM ANIMAL_OUTS A RIGHT OUTER JOIN 
+(
+    SELECT LEVEL-1 HOUR FROM DUAL CONNECT BY LEVEL >= 0 AND LEVEL <= 24
+) B ON TO_CHAR(A.DATETIME, 'HH24') = B.HOUR
+GROUP BY B.HOUR
+ORDER BY B.HOUR;
