@@ -44,4 +44,6 @@ for x in range(1, n1):
             for d2 in range(1, n1):
                 if 1 <= x < x + d1 + d2 <= n and 1 <= y - d1 < y < y + d2 <= n:
                     min_val = min(min_val, solution(x, y, d1, d2))
+                else:
+                    break
 print(min_val)
