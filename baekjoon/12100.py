@@ -1,5 +1,6 @@
 # 2048 
-from copy import deepcopy
+def deepcopy(arr):
+    return [[a for a in ar] for ar in arr]
 
 n = int(input())
 maps = [list(map(int, input().split())) for _ in range(n)]

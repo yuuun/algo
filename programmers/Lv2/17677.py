@@ -10,19 +10,18 @@ def solution(str1, str2):
     if str1 == [] and str2 == []:
         return 65536
     
-    str1.sort(), str2.sort()
+    union = len(str1) + len(str2)
     inter = 0
-    j = 0
-    for i in range(len(str1)):
-        for k in range(j, len(str2)):
-            if str1[i] == str2[k]:
-                inter += 1
-                j = k
-                break
-    union = len(str1) + len(str2) - inter
+    for s1 in str1:
+        if s1 in str2:
+            inter += 1
+            str2.remove(s1)
+    
+    union = union - inter
     
     return int(inter * 65536 / union) 
 
 print(solution('FRANCE', 'french'))
 print(solution("E=M*C^2", "e=m*c^2"))
 print(solution('aa1+aa2', 'AAAA12'))
+print(solution('aabbc', 'abbde'))
