@@ -28,8 +28,6 @@ def snail():
     add_min()
     left, right = [[fishes[0]], [fishes[1]]], fishes[2:]
     z = 2
-    left = rotate90(left) + [right[:2]]
-    right = right[2:]
     i = 0
     while True:
         left = rotate90(left) + [right[:z]]
@@ -93,21 +91,21 @@ def snail():
         right.append(fishes[i][n_4:])
     left = rotate90(rotate90(left))
     fishes = left + right
+    r, c = len(fishes), len(fishes[0])
+    add_cnt = [[0] * c for _ in range(r)]
 
-    add_cnt = [[0] * n_4 for _ in range(n_2)]
-
-    for x in range(n_2):
-        for y in range(n_4):
+    for x in range(r):
+        for y in range(c):
             for dx, dy in [[0, 1], [1, 0]]:
                 nx, ny = x + dx, y + dy
-                if nx < n_2 and ny < n_4:
+                if nx < r and ny < c:
                     sub = int((fishes[nx][ny] - fishes[x][y]) / 5)
                     if sub != 0:
                         add_cnt[nx][ny] -= sub
                         add_cnt[x][y] += sub
     
-    for x in range(n_2):
-        for y in range(n_4):
+    for x in range(r):
+        for y in range(c):
             fishes[x][y] += add_cnt[x][y]
     
     fishes = flatten(fishes)
@@ -115,7 +113,6 @@ def snail():
 cnt = 1
 while True:
     snail()
-    print(fishes)
     if find_sub() <= k:
         print(cnt)
         break
