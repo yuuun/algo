@@ -1,18 +1,21 @@
 n, m = map(int, input().split())
 maps = []
+rx, ry, bx, by, fx, fy = 0, 0, 0, 0, 0, 0
 for i in range(n):
     tmp = list(input())
-    for j in range(n):
-        if tmp[j] == '.' or tmp[j] == '#':
+    for j in range(m):
+        if tmp[j] == '#':
             continue
-        else:
-            if tmp[j] == 'R':
-                rx, ry = i, j
-            elif tmp[j] == 'B':
-                bx, by = i, j
-            else:
-                fx, fy = i, j
+        if tmp[j] == 'B':
+            bx, by = i, j
             tmp[j] = '.'
+            continue
+        if tmp[j] == 'R':
+            rx, ry = i, j
+            tmp[j] = '.'
+            continue
+        if tmp[j] == 'O':
+            fx, fy = i, j
     maps.append(tmp)
 
 visited = [[[[False] * m for _ in range(n)] for _ in range(m)] for _ in range(n)]
