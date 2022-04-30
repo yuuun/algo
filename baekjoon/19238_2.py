@@ -50,6 +50,8 @@ def find_customer():
                 tmp.append([0, sx, sy, i])
             else:
                 dist = dist_map[sx][sy]
+                if dist == 0:
+                    return -1
                 if dist != 0 and k >= dist: # 거리가 0일 경우에는, 택시가 고객이 있는 곳으로 이동 불가
                     tmp.append([dist, sx, sy, i])
     
