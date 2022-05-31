@@ -1,22 +1,24 @@
-# TBD
 from heapq import heappush, heappop
 
 pq = []
-table = []
 n = int(input())
+room = [0] * n
+arr = []
 for _ in range(n):
     idx, s, e = map(int, input().split())
-    heappush(pq, (s, e, idx))
-for i in range(n):
-    s, e, idx = heappop(pq)
-    
-    if len(table) == 0:
-        heappush(table, (e, s, idx))
-        continue
+    arr.append([s, e, idx - 1])
 
-    te, ts, tidx = heappop(table)
-    if te > s:
-        heappush(table, (te, ts, tidx))
-    heappush(table, (e, s, idx))
-print(len(table))
-print(table)
+arr = sorted(arr, key=lambda x:(x[0]))
+ans = 0
+for s, e, idx in arr:
+    if pq and pq[0][0] <= s:
+        room[idx] = room[pq[0][2]]
+        heappop(pq)
+    else:
+        ans += 1
+        room[idx] = ans
+        
+    heappush(pq, [e, s, idx])
+print(ans)
+for i in room[1:]:
+    print(i)
