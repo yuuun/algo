@@ -1,31 +1,33 @@
-#시간 초과,...
+from collections import deque
 m, n = map(int, input().split())
-adj = []
-queue = []
-cnt = 1
-for x in range(n):
+maps = []
+n_totmato = 0
+totmato = deque()
+for i in range(n):
     tmp = list(map(int, input().split()))
-    adj.append(tmp)
-    for idx, t in enumerate(tmp):
+    for j, t in enumerate(tmp):
         if t == 1:
-            queue.append([x, idx])
-              
-d = [[1, 0], [-1, 0], [0, 1], [0, -1]]
-while queue:
-    lis = queue.pop(0)
-    x, y = lis
-    for dx, dy in d:
-        tx, ty = x + dx, y + dy
-        if 0 <= tx < n and 0 <= ty < m and adj[tx][ty] == 0:
-            adj[tx][ty] = adj[x][y] + 1
-            queue.append([tx, ty])
+            totmato.append([i, j])
+        elif t == 0:
+            n_totmato += 1
 
-max_val = 0
-for ad in adj:
-    if 0 in ad:
-        print(-1)
-        break
-    for a in ad:
-        if max_val < a:
-            max_val = a
-print(max_val - 1)
+    maps.append(tmp)
+
+ans = 0
+dxy = [[0, 1], [1, 0], [-1, 0], [0, -1]]
+while n_totmato > 0 and totmato:
+    x, y = totmato.popleft()
+    ans = max(ans, maps[x][y])
+    c = maps[x][y] + 1
+    for dx, dy in dxy:
+        nx, ny = x + dx, y + dy
+        if 0 <= nx < n and 0 <= ny < m:
+            if maps[nx][ny] == 0:
+                totmato.append([nx, ny])
+                maps[nx][ny] = c
+                n_totmato -= 1
+
+if n_totmato == 0:
+    print(ans)
+else:
+    print(-1)
