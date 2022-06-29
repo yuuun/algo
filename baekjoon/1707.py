@@ -1,29 +1,33 @@
 #TBD
-#from collections import deque
+from collections import deque
 k = int(input())
 
 def bfs(s):
-    visited[s] = True
-    for vi in adj[s]:
-        if visited[vi]:
-            return False
-        visited[vi] = True
-
+    visited[s] = 1
+    q = deque()
+    q.append(s)
+    while q:
+        a = q.popleft()
+        for i in adj[a]:
+            if visited[i] == 0:
+                visited[i] = -visited[a]
+                q.append(i)
+            elif visited[i] == visited[a]:
+                return False
     return True
 
 for _ in range(k):
     v, e = map(int, input().split())
     adj = [[] for _ in range(v)]
-    visited = [False for _ in range(v)]
-    visited[0] = True
+    visited = [0 for _ in range(v)]
     for _ in range(e):
         x, y = map(lambda x: int(x) - 1, input().split())
         adj[x].append(y)
-
-    cnt = 0
+        adj[y].append(x)
+    isTrue = True
     for idx, isvisit in enumerate(visited):
-        if not isvisit:
+        if isvisit == 0:
             if not bfs(idx):
-                cnt += 1
-    
-    print("NO" if cnt > 1 else "YES")
+                isTrue = False
+                break
+    print('YES' if isTrue else 'NO')
